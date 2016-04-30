@@ -1,17 +1,17 @@
 
-public class Vektor2D extends Vektor{
+public class Vektor2D extends Vektor {
 
-    public Vektor2D(){
+    public Vektor2D() {
         super(2);
     }
-    public Vektor2D(double x, double y){
+
+    public Vektor2D(double x, double y) {
         super(2);
-        super.setPosition(x,y);
+        super.setPosition(x, y);
     }
+
     public void setPosition(double x, double y) {
-        super.setPosition(x,y);
+        super.setPosition(x, y);
     }
 
 }
-
-/*Vektor2D vek2d = new Vektor2D();*/
