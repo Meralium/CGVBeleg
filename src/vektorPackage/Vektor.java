@@ -1,3 +1,5 @@
+package vektorPackage;
+
 import exceptions.VektorOverflowException;
 
 import java.util.Arrays;
@@ -19,12 +21,13 @@ public abstract class Vektor {
         *   this.vek[i] = 0;
         * }*/
     }
+
     /*----------------------------------------------------*/
 
     /*-----------------'klassische' class-level Funktionen*/
     @Override
     public String toString() {
-        return "Vektor{" +
+        return "vektorPackage.Vektor{" +
                 "vek=" + Arrays.toString(this.vek) +
                 '}';
     }
@@ -63,28 +66,52 @@ public abstract class Vektor {
         }
     }
 
-    public boolean isNullVektor() {
+    protected boolean isNullVektor() {
         for (int i = 0; i < this.vek.length; i++) {
             if (this.vek[i] != 0) return false;
         }
         return true;
     }
 
-    protected void add(double summand) throws VektorOverflowException {
-        for (int i = 0; i < this.vek.length; i++){
-            if (Double.MAX_VALUE - summand >= vek[i]) {
-                this.vek[i] += summand;
+    protected void add(Vektor summand) throws VektorOverflowException {
+        for (int i = 0; i < this.vek.length; i++) {
+            if ((summand.vek[i] > Double.MAX_VALUE - this.vek[i]) || (summand.vek[i] < -Double.MAX_VALUE - this.vek[i])) {
+                throw new VektorOverflowException();
+            }
+            this.vek[i] += summand.vek[i];
+        }
+    }
+
+    protected void sub(Vektor subtrahend) throws VektorOverflowException {
+        for (int i = 0; i < subtrahend.vek.length; i++) {
+            subtrahend.vek[i] = -subtrahend.vek[i];
+        }
+        add(subtrahend);
+    }
+
+    protected void mult(double multiplikand) throws VektorOverflowException {
+        for (int i = 0; i < this.vek.length; i++) {
+            if (Math.abs(vek[i]) != 0 && (Double.MAX_VALUE / Math.abs(vek[i]) < multiplikand)) {
+                throw new VektorOverflowException();
+            }
+            if (Math.abs(1/multiplikand) < 1 && (vek[i] / Double.MAX_VALUE > Math.abs(multiplikand))) {
+                throw new VektorOverflowException();
             }
             else {
-                throw new VektorOverflowException();
+                this.vek[i] *= multiplikand;
             }
         }
     }
 
-    protected void mult(double multiplikand) {
+    protected void div(double divisor) throws VektorOverflowException {
+        mult(1 / divisor);
+    }
+
+    protected boolean isEqual(Vektor zweiterVektor) {
         for (int i = 0; i < this.vek.length; i++) {
-            this.vek[i] *= multiplikand;
+            if (this.vek[i] != zweiterVektor.vek[i]) return false;
         }
+        return true;
     }
 
     /*----------------------------------------------------*/

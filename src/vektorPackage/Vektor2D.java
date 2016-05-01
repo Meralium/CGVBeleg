@@ -1,3 +1,4 @@
+package vektorPackage;
 
 public class Vektor2D extends Vektor {
 

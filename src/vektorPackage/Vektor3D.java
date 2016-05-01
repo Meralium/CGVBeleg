@@ -1,3 +1,4 @@
+package vektorPackage;
 
 public class Vektor3D extends Vektor {
 
@@ -14,7 +15,7 @@ public class Vektor3D extends Vektor {
         super.setPosition(x, y, z);
     }
 
-    /*müsste nur in Vektor3D sein*/
+    /*müsste nur in vektorPackage.Vektor3D sein*/
     public double getZ() {
         return super.getVek()[2];
     }

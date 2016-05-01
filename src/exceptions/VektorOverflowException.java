@@ -1,5 +1,6 @@
 package exceptions;
 
-public class VektorOverflowException extends Exception {
+import vektorPackage.Vektor2D;
 
+public class VektorOverflowException extends Exception {
 }
