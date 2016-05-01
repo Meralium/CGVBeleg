@@ -85,8 +85,15 @@ public class Tests {
 
     @Test
     public void testIsEqual() {
-        Vektor2D vek = new Vektor2D(2, 5);
-        Vektor2D vek2 = new Vektor2D(2, 5);
+        Vektor2D vek = new Vektor2D(Double.MAX_VALUE, 5);
+        Vektor2D vek2 = new Vektor2D(Double.MAX_VALUE, 5);
+        Assert.assertTrue(vek.isEqual(vek2));
+    }
+    @Test
+    public void testIsNotEqual() {
+        Vektor3D vek = new Vektor3D(Double.MAX_VALUE, 5, 3);
+        vek.setPosition(23,43);
+        Vektor3D vek2 = new Vektor3D(Double.MAX_VALUE, 5, 3);
         Assert.assertTrue(vek.isEqual(vek2));
     }
 

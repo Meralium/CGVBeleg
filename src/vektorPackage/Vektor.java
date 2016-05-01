@@ -114,6 +114,10 @@ public abstract class Vektor {
         return true;
     }
 
+    protected boolean isNotEqual(Vektor zweiterVektor) {
+        return !isEqual(zweiterVektor);
+    }
+
     /*----------------------------------------------------*/
 
 }

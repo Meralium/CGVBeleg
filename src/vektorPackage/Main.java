@@ -3,7 +3,7 @@ package vektorPackage;
 public class Main {
 
     public static void main(String agrs[]) {
-        Vektor2D vek = new Vektor2D();
+        Vektor3D vek = new Vektor3D();
 
     }
 
