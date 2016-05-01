@@ -128,4 +128,18 @@ public class Tests {
         System.out.println(vek2.length());
     }
 
+    @Test
+    public void testNormalizeWithException() throws VektorOverflowException {
+        expectedException.expect(VektorOverflowException.class);
+        Vektor3D vek = new Vektor3D(Double.MAX_VALUE, 2, 1);
+        vek.normalize();
+    }
+
+    @Test
+    public void testNormalize() throws VektorOverflowException {
+        Vektor2D vek2 = new Vektor2D(54, -34);
+        vek2.normalize();
+        System.out.println(vek2.length());
+    }
+
 }

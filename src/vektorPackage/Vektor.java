@@ -117,10 +117,15 @@ public abstract class Vektor {
 
     public double length() throws VektorOverflowException {
         double laenge = 0;
-        for (int i = 0; i < vek.length; i++) {
+        for (int i = 0; i < this.vek.length; i++) {
             laenge = add2Doubles(laenge, mult2Doubles(this.vek[i], this.vek[i]));
         }
         return Math.sqrt(laenge);
+    }
+
+    public void normalize() throws VektorOverflowException {
+        double laenge = length();
+        div(laenge);
     }
 
     /*----------------------------------------------------*/
