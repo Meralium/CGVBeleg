@@ -6,8 +6,6 @@ import org.junit.rules.ExpectedException;
 import vektorPackage.Vektor2D;
 import vektorPackage.Vektor3D;
 import org.junit.Test;
-import org.junit.Assert;
-
 import static org.junit.Assert.*;
 
 public class Tests {
@@ -20,14 +18,14 @@ public class Tests {
         Vektor2D vek = new Vektor2D();
         double[] a = {5, 5};
         vek.setPosition(a);
-        Assert.assertEquals(a[0], vek.getX(), 0);
-        Assert.assertEquals(a[1], vek.getY(), 0);
+        assertEquals(a[0], vek.getX(), 0);
+        assertEquals(a[1], vek.getY(), 0);
         Vektor3D vek3 = new Vektor3D();
         double[] b = {-8, 5, 6};
         vek3.setPosition(b);
-        Assert.assertEquals(b[0], vek3.getX(), 0);
-        Assert.assertEquals(b[1], vek3.getY(), 0);
-        Assert.assertEquals(b[2], vek3.getZ(), 0);
+        assertEquals(b[0], vek3.getX(), 0);
+        assertEquals(b[1], vek3.getY(), 0);
+        assertEquals(b[2], vek3.getZ(), 0);
     }
 
     @Test
@@ -36,12 +34,12 @@ public class Tests {
         Vektor3D vek3 = new Vektor3D();
         vek.setPosition(0, 0);
         vek3.setPosition(0, 0, 0);
-        Assert.assertTrue(vek.isNullVektor());
-        Assert.assertTrue(vek3.isNullVektor());
+        assertTrue(vek.isNullVektor());
+        assertTrue(vek3.isNullVektor());
         vek.setPosition(1, 0);
         vek3.setPosition(65, 34, 0);
-        Assert.assertFalse(vek.isNullVektor());
-        Assert.assertFalse(vek3.isNullVektor());
+        assertFalse(vek.isNullVektor());
+        assertFalse(vek3.isNullVektor());
     }
 
     @Test
@@ -78,7 +76,6 @@ public class Tests {
             System.out.println(vek.toString());
         } catch (VektorOverflowException e) {
             System.out.println("OVERFLOW");
-            Assert.fail();
         }
     }
 
@@ -97,21 +94,21 @@ public class Tests {
     public void testIsEqual() {
         Vektor3D vek = new Vektor3D(Double.MAX_VALUE, 5, 5);
         Vektor3D vek2 = new Vektor3D(Double.MAX_VALUE, 5, 5);
-        Assert.assertTrue(vek.isEqual(vek2));
+        assertTrue(vek.isEqual(vek2));
     }
 
     @Test
     public void testIsNotEqual() {
         Vektor3D vek = new Vektor3D(Double.MAX_VALUE, 5, 3);
         Vektor2D vek2 = new Vektor2D(Double.MAX_VALUE, 5);
-        Assert.assertTrue(vek.isNotEqual(vek2));
+        assertTrue(vek.isNotEqual(vek2));
     }
 
     @Test
     public void testIsSameDimension() {
         Vektor3D vek = new Vektor3D(Double.MAX_VALUE, 5, 3);
         Vektor2D vek2 = new Vektor2D(Double.MAX_VALUE, 5);
-        Assert.assertFalse(vek.isSameDimension(vek2));
+        assertFalse(vek.isSameDimension(vek2));
     }
 
     @Test

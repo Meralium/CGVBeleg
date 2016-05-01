@@ -129,6 +129,7 @@ public abstract class Vektor {
     }
 
     /*----------------------------------------------------*/
+
     /*----------------------------------private Funktionen*/
     private double mult2Doubles(double aktuelleZahl, double multiplikand) throws VektorOverflowException {
         if (Math.abs(aktuelleZahl) != 0 && (Double.MAX_VALUE / Math.abs(aktuelleZahl) < multiplikand)) {
