@@ -11,6 +11,10 @@ public class Vektor2D extends Vektor {
         super.setPosition(x, y);
     }
 
+    public Vektor getClone() {
+        return new Vektor2D(getX(),getY());
+    }
+
     public void setPosition(double x, double y) {
         super.setPosition(x, y);
     }

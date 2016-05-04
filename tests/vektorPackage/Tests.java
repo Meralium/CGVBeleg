@@ -48,11 +48,13 @@ public class Tests {
         Vektor3D vek = new Vektor3D(Double.MAX_VALUE, 0, 0);
         Vektor3D vek2 = new Vektor3D(Double.MAX_VALUE, 1, 2);
         vek.add(vek2);
+        Vektor2D vek1 = new Vektor2D(1,2);
+        vek1.add(vek);
     }
 
     @Test
     public void testAddition() throws VektorOverflowException {
-        Vektor3D vek = new Vektor3D(-Double.MAX_VALUE, 0, 0);
+        Vektor3D vek = new Vektor3D(Double.MAX_VALUE, 0, 0);
         Vektor3D vek2 = new Vektor3D(0, 1, 2);
         vek.add(vek2);
         System.out.println(vek.toString());
@@ -137,6 +139,15 @@ public class Tests {
         Vektor2D vek2 = new Vektor2D(54, -34);
         vek2.normalize();
         System.out.println(vek2.length());
+    }
+
+    @Test
+    public void testNegation() {
+        Vektor2D vek2 = new Vektor2D(-1, -34);
+        vek2.negiere();
+        assertEquals(1, vek2.getX(),0);
+        assertEquals(34, vek2.getY(),0);
+        System.out.println(vek2);
     }
 
 }

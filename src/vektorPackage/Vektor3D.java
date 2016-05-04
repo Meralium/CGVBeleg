@@ -15,6 +15,10 @@ public class Vektor3D extends Vektor {
         super.setPosition(x, y, z);
     }
 
+    public Vektor getClone() {
+        return new Vektor3D(this.getX(), this.getY(), this.getZ());
+    }
+
     /*müsste nur in vektorPackage.Vektor3D sein*/
     public double getZ() {
         return super.getVek()[2];
@@ -23,6 +27,5 @@ public class Vektor3D extends Vektor {
     public void setZ(double z) {
         super.getVek()[2] = z;
     }
-
 
 }
