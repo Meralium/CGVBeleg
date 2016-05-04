@@ -30,4 +30,12 @@ public class LineareAlgebra {
         return vektor1.isNotEqual(vektor2);
     }
 
+    public static double length(Vektor vektor) throws VektorOverflowException {
+        return vektor.length();
+    }
+
+    public static Vektor normalize(Vektor vektor) throws VektorOverflowException {
+        return vektor.normalize();
+    }
+
 }

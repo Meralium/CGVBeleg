@@ -131,9 +131,9 @@ public abstract class Vektor {
         return Math.sqrt(laenge);
     }
 
-    public void normalize() throws VektorOverflowException {
+    public Vektor normalize() throws VektorOverflowException {
         double laenge = length();
-        div(laenge);
+        return div(laenge);
     }
 
     /*----------------------------------------------------*/

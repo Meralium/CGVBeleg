@@ -70,6 +70,21 @@ public class LinAlgTests {
         assertFalse(LineareAlgebra.isNotEqual(vek1, vek4));
     }
 
+    @Test
+    public void testeLength() throws VektorOverflowException {
+        Vektor2D vek1 = new Vektor2D(-54.23, 23);
+        Vektor3D vek2 = new Vektor3D(-2, 3.43, -4.0004);
+        double vek1Length = LineareAlgebra.length(vek1);
+        double vek2Length = LineareAlgebra.length(vek2);
+        System.out.println(vek1Length);
+        System.out.println(vek2Length);
+    }
 
+    @Test
+    public void testeNormalize() throws VektorOverflowException {
+        Vektor2D vek1 = new Vektor2D(12, 23);
+        Vektor2D vek2 = (Vektor2D) LineareAlgebra.normalize(vek1);
+        assertEquals(1, vek2.length(), 0);
+    }
 
 }
