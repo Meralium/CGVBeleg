@@ -87,4 +87,29 @@ public class LinAlgTests {
         assertEquals(1, vek2.length(), 0);
     }
 
+    @Test
+    public void testeEuklDistance() throws VektorOverflowException {
+        expectedException.expect(VektorOverflowException.class);
+        Vektor2D vek1 = new Vektor2D(Double.MAX_VALUE, -3.5433);
+        Vektor2D vek2 = new Vektor2D(2.5, 3);
+        double res = LineareAlgebra.euklDistance(vek1, vek2);
+        System.out.println(res);
+    }
+
+    @Test
+    public void testeManhattanlDistance() throws VektorOverflowException {
+        Vektor2D vek1 = new Vektor2D(5, -4);
+        Vektor2D vek2 = new Vektor2D(2, 3);
+        double res = LineareAlgebra.manhattanDistance(vek1, vek2);
+        assertEquals(10, res, 0);
+        System.out.println(res);
+    }
+
+    @Test
+    public void testeAbs() {
+        Vektor2D vek1 = new Vektor2D(-Double.MAX_VALUE, -4.212);
+        LineareAlgebra.abs(vek1);
+        System.out.println(vek1.toString());
+    }
+
 }

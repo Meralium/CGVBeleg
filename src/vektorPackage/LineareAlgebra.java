@@ -38,4 +38,26 @@ public class LineareAlgebra {
         return vektor.normalize();
     }
 
+    public static double euklDistance(Vektor vektor1, Vektor vektor2) throws VektorOverflowException {
+        return (vektor1.sub(vektor2)).length();
+    }
+
+    public static double manhattanDistance(Vektor vektor1, Vektor vektor2) throws VektorOverflowException {
+        return (LineareAlgebra.abs(vektor1.sub(vektor2))).addCoords();
+    }
+
+    /*public static Vektor3D crossProduct3D(Vektor3D vektor1, Vektor3D vektor2) throws VektorOverflowException {
+        Vektor3D res = new Vektor3D();
+        res.setX(vektor1.mult2Doubles(vektor1.getY(), vektor2.getZ()));
+        res.setY(vektor1.mult2Doubles(vektor1.getY(), vektor2.getZ()));
+        res.setZ(vektor1.mult2Doubles(vektor1.getY(), vektor2.getZ()));
+    }*/
+
+    public static Vektor abs(Vektor vektor) {
+        for (int i = 0; i < vektor.getVek().length; i++) {
+            vektor.getVek()[i] = Math.abs(vektor.getVek()[i]);
+        }
+        return vektor;
+    }
+
 }
