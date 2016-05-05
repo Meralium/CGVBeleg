@@ -4,6 +4,8 @@ import exceptions.VektorOverflowException;
 import vektorPackage.Vektor;
 import vektorPackage.Vektor2D;
 
+import java.util.Map;
+
 public class LineareAlgebra {
 
     public static Vektor add(Vektor vektor1, Vektor vektor2) throws VektorOverflowException {
@@ -76,6 +78,38 @@ public class LineareAlgebra {
     public static double sinEquation(Vektor3D vektor1, Vektor3D vektor2) throws VektorOverflowException {
         return vektor1.mult2Doubles((LineareAlgebra.crossProduct3D(vektor1, vektor2)).length(),
                 1 / (vektor1.mult2Doubles(vektor1.length(), vektor2.length())));
+    }
+
+    public static double angleRad(Vektor vektor1, Vektor vektor2) throws VektorOverflowException {
+        return Math.acos(LineareAlgebra.cosEquation(vektor1, vektor2));
+    } /*nothing FOR 2D*/
+
+    public static double angleDegree(Vektor3D vektor1, Vektor3D vektor2) throws VektorOverflowException {
+        return radToDegree(LineareAlgebra.angleRad(vektor1, vektor2));
+    } /*nothing FOR 2D*/
+
+    public static double degreeToRad(double degree) throws VektorOverflowException {
+        return Vektor.mult2Doubles(degree, Math.PI / 180);
+    }
+
+    public static double radToDegree(double rad) throws VektorOverflowException {
+        return Vektor.mult2Doubles(rad, 180 / Math.PI);
+    }
+
+    public static double determinate(Vektor2D vektor1, Vektor2D vektor2) throws VektorOverflowException {
+        return crossProduct2D(vektor1, vektor2);
+    }
+
+    public static double determinate(Vektor3D vektor1, Vektor3D vektor2, Vektor3D vektor3) throws VektorOverflowException {
+        double res1 = 0;
+        double res2 = 0;
+        for (int i = 1; i < vektor1.getVek().length + 1; i++) {
+            res1 += Vektor.mult2Doubles(Vektor.mult2Doubles(vektor1.getVek()[(i - 1) % 3], vektor2.getVek()[i % 3]),
+                                        vektor3.getVek()[(i + 1) % 3]);
+            res2 -= Vektor.mult2Doubles(Vektor.mult2Doubles(vektor1.getVek()[i % 3], vektor2.getVek()[(i + 2) % 3]),
+                                        vektor3.getVek()[(i + 1) % 3]);
+        }
+        return Vektor.add2Doubles(res1, res2);
     }
 
     public static Vektor abs(Vektor vektor) {

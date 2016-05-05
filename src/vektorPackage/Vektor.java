@@ -148,7 +148,7 @@ public abstract class Vektor {
     /*----------------------------------------------------*/
 
     /*----------------------------------private Funktionen*/
-    public double mult2Doubles(double aktuelleZahl, double multiplikand) throws VektorOverflowException {
+    public static double mult2Doubles(double aktuelleZahl, double multiplikand) throws VektorOverflowException {
         if (Math.abs(aktuelleZahl) != 0 && (Double.MAX_VALUE / Math.abs(aktuelleZahl) < multiplikand)) {
             throw new VektorOverflowException();
         }
@@ -158,7 +158,7 @@ public abstract class Vektor {
         return aktuelleZahl * multiplikand;
     }
 
-    public double add2Doubles(double aktuelleZahl, double summand) throws VektorOverflowException {
+    public static double add2Doubles(double aktuelleZahl, double summand) throws VektorOverflowException {
         if ((summand > Double.MAX_VALUE - aktuelleZahl) || (summand < -Double.MAX_VALUE - aktuelleZahl)) {
             throw new VektorOverflowException();
         }

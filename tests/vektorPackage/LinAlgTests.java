@@ -155,4 +155,33 @@ public class LinAlgTests {
         double res = LineareAlgebra.sinEquation(vek, vek1);
         System.out.println(res);
     }
+
+    @Test
+    public void testAngleRad() throws VektorOverflowException{
+        Vektor3D vek = new Vektor3D(20.239, -8, 4);
+        Vektor3D vek1 = new Vektor3D(6, 3.32, -4);
+        double res = LineareAlgebra.angleRad(vek, vek1);
+        System.out.println(res);
+        Vektor2D vek2 = new Vektor2D(3,0);
+        Vektor2D vek3 = new Vektor2D(5,5);
+        res = LineareAlgebra.angleRad(vek2, vek3);
+        System.out.println(res);
+    }
+
+    @Test
+    public void testAngleDegree() throws VektorOverflowException{
+        Vektor3D vek = new Vektor3D(3, 0, 0);
+        Vektor3D vek1 = new Vektor3D(5, 5, 0);
+        double res = LineareAlgebra.angleDegree(vek, vek1);
+        System.out.println(res);
+    }
+
+    @Test
+    public void testDeterminate() throws VektorOverflowException{
+        Vektor3D vek = new Vektor3D(0, 3, 1);
+        Vektor3D vek1 = new Vektor3D(1, 2, 1);
+        Vektor3D vek2 = new Vektor3D(2, 1, 0);
+        double res = LineareAlgebra.determinate(vek, vek1, vek2);
+        System.out.println(res);
+    }
 }
