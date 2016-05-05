@@ -112,4 +112,47 @@ public class LinAlgTests {
         System.out.println(vek1.toString());
     }
 
+    @Test
+    public void testeCrossProdukt2D() throws VektorOverflowException {
+        Vektor2D vek = new Vektor2D(1, 2);
+        Vektor2D vek1 = new Vektor2D(-7, 8);
+        double expected = 22;
+        double res = LineareAlgebra.crossProduct2D(vek, vek1);
+        System.out.println(res);
+        assertEquals(expected, res, 0);
+    }
+
+    @Test
+    public void testeCrossProdukt3D() throws VektorOverflowException {
+        Vektor3D vek = new Vektor3D(1, 2, 3);
+        Vektor3D vek1 = new Vektor3D(-7, 8, 9);
+        Vektor3D expected = new Vektor3D(-6, -30, 22);
+        Vektor3D res = LineareAlgebra.crossProduct3D(vek, vek1);
+        System.out.println(res.toString());
+        assertArrayEquals(expected.getVek(), res.getVek(), 0);
+    }
+
+    @Test
+    public void testeDotProduct() throws VektorOverflowException {
+        Vektor2D vek = new Vektor2D(32, 2);
+        Vektor2D vek1 = new Vektor2D(-7, 9);
+        double res = LineareAlgebra.dotProduct(vek1, vek);
+        System.out.println(res);
+    }
+
+    @Test
+    public void testecosEquation () throws VektorOverflowException {
+        Vektor3D vek = new Vektor3D(20, 8, 4);
+        Vektor3D vek1 = new Vektor3D(6, 3, 2);
+        double res = LineareAlgebra.cosEquation(vek, vek1);
+        System.out.println(res);
+    }
+
+    @Test
+    public void testeSinEquation () throws VektorOverflowException {
+        Vektor3D vek = new Vektor3D(20, 8, 4);
+        Vektor3D vek1 = new Vektor3D(6, 3, 2);
+        double res = LineareAlgebra.sinEquation(vek, vek1);
+        System.out.println(res);
+    }
 }
