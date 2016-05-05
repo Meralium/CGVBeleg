@@ -97,13 +97,12 @@ public abstract class Vektor {
     }
 
     protected Vektor add(Vektor summand) throws VektorOverflowException {
-        if (isSameDimension(summand)) {
-            for (int i = 0; i < this.vek.length; i++) {
-                this.vek[i] = add2Doubles(this.vek[i], summand.vek[i]);
-            }
+        if (!isSameDimension(summand)) throw new VektorOverflowException();
+        for (int i = 0; i < this.vek.length; i++) {
+            this.vek[i] = add2Doubles(this.vek[i], summand.vek[i]);
         }
         return this;
-    } /*WERFE EXCEPTION FALLS DIMENSION NICHT STIMMT*/
+    }
 
     protected Vektor sub(Vektor subtrahend) throws VektorOverflowException {
         return add(subtrahend.negiere());
