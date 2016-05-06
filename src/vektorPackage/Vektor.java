@@ -26,6 +26,8 @@ public abstract class Vektor {
     /*----------------------------------------------------*/
 
     /*-----------------'klassische' class-level Funktionen*/
+    abstract public Vektor getClone();
+
     @Override
     public String toString() {
         return "vektorPackage.Vektor{" +
@@ -77,26 +79,24 @@ public abstract class Vektor {
         return res;
     }
 
-    abstract public Vektor getClone();
-
 /*----------------------------------------------------*/
 
     /*------------------------------------Beleg-Funktionen*/
 
-    protected void setPosition(double... koordinaten) {
+    public void setPosition(double... koordinaten) {
         for (int i = 0; i < koordinaten.length; i++) {
             this.vek[i] = koordinaten[i];
         }
     }
 
-    protected boolean isNullVektor() {
+    public boolean isNullVektor() {
         for (int i = 0; i < this.vek.length; i++) {
             if (this.vek[i] != 0) return false;
         }
         return true;
     }
 
-    protected Vektor add(Vektor summand) throws VektorOverflowException {
+    public Vektor add(Vektor summand) throws VektorOverflowException {
         if (!isSameDimension(summand)) throw new VektorOverflowException();
         for (int i = 0; i < this.vek.length; i++) {
             this.vek[i] = add2Doubles(this.vek[i], summand.vek[i]);
@@ -104,22 +104,22 @@ public abstract class Vektor {
         return this;
     }
 
-    protected Vektor sub(Vektor subtrahend) throws VektorOverflowException {
+    public Vektor sub(Vektor subtrahend) throws VektorOverflowException {
         return add(subtrahend.negiere());
     }
 
-    protected Vektor mult(double multiplikand) throws VektorOverflowException {
+    public Vektor mult(double multiplikand) throws VektorOverflowException {
         for (int i = 0; i < this.vek.length; i++) {
             this.vek[i] = mult2Doubles(vek[i], multiplikand);
         }
         return this;
     }
 
-    protected Vektor div(double divisor) throws VektorOverflowException {
+    public Vektor div(double divisor) throws VektorOverflowException {
         return mult(1 / divisor);
     }
 
-    protected boolean isEqual(Vektor zweiterVektor) {
+    public boolean isEqual(Vektor zweiterVektor) {
         if (!isSameDimension(zweiterVektor)) return false;
         for (int i = 0; i < this.vek.length; i++) {
             if (this.vek[i] != zweiterVektor.vek[i]) return false;
@@ -127,7 +127,7 @@ public abstract class Vektor {
         return true;
     }
 
-    protected boolean isNotEqual(Vektor zweiterVektor) {
+    public boolean isNotEqual(Vektor zweiterVektor) {
         return !isEqual(zweiterVektor);
     }
 

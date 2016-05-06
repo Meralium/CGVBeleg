@@ -3,9 +3,8 @@ package vektorPackage;
 import exceptions.VektorOverflowException;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
-import vektorPackage.Vektor2D;
-import vektorPackage.Vektor3D;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class Tests {
@@ -48,7 +47,7 @@ public class Tests {
         Vektor3D vek = new Vektor3D(Double.MAX_VALUE, 0, 0);
         Vektor3D vek2 = new Vektor3D(Double.MAX_VALUE, 1, 2);
         vek.add(vek2);
-        Vektor2D vek1 = new Vektor2D(1,2);
+        Vektor2D vek1 = new Vektor2D(1, 2);
         vek1.add(vek);
     }
 
@@ -71,25 +70,45 @@ public class Tests {
     }
 
     @Test
-    public void testMultiplikation() {
-        try {
-            Vektor2D vek = new Vektor2D(6, 0);
-            vek.mult(0);
-            System.out.println(vek.toString());
-        } catch (VektorOverflowException e) {
-            System.out.println("OVERFLOW");
-        }
+    public void testMultiplikation() throws VektorOverflowException {
+        Vektor2D vek = new Vektor2D(6, 0);
+        vek.mult(0);
+        assertEquals(0, vek.getX(), 0);
+        assertEquals(0, vek.getY(), 0);
+        Vektor3D vek2 = new Vektor3D(Double.MAX_VALUE, Double.MIN_VALUE, 9);
+        vek2.mult(1);
+        assertEquals(Double.MAX_VALUE, vek2.getX(), 0);
+        assertEquals(Double.MIN_VALUE, vek2.getY(), 0);
+        assertEquals(9, vek2.getZ(), 0);
+        vek2.mult(0);
+        assertEquals(0, vek2.getX(), 0);
+        assertEquals(0, vek2.getY(), 0);
+        assertEquals(0, vek2.getZ(), 0);
+        vek2.mult(Double.MIN_VALUE);
+        assertEquals(0, vek2.getX(), 0);
+        assertEquals(0, vek2.getY(), 0);
+        assertEquals(0, vek2.getZ(), 0);
+        vek2.setPosition();
     }
 
     @Test
-    public void testDivision() {
-        try {
-            Vektor2D vek = new Vektor2D(5, 5);
-            vek.div(Double.MAX_VALUE);
-            System.out.println(vek.toString());
-        } catch (VektorOverflowException e) {
-            System.out.println("OVERFLOW");
-        }
+    public void testDivisionWithException() throws VektorOverflowException {
+        expectedException.expect(VektorOverflowException.class);
+        Vektor2D vek = new Vektor2D(5, 5);
+        vek.div(0);
+    }
+
+    @Test
+    public void testDivision2() throws VektorOverflowException {
+        Vektor2D vek = new Vektor2D(5, -5);
+        vek.div(-2);
+        assertEquals(-2.5, vek.getX(), 0);
+        assertEquals(2.5, vek.getY(), 0);
+        Vektor3D vek2 = new Vektor3D(5, -5, 0.1);
+        vek2.div(0.1);
+        assertEquals(50, vek2.getX(), 0);
+        assertEquals(-50, vek2.getY(), 0);
+        assertEquals(1, vek2.getZ(), 0);
     }
 
     @Test
@@ -97,6 +116,9 @@ public class Tests {
         Vektor3D vek = new Vektor3D(Double.MAX_VALUE, 5, 5);
         Vektor3D vek2 = new Vektor3D(Double.MAX_VALUE, 5, 5);
         assertTrue(vek.isEqual(vek2));
+        Vektor2D vek3 = new Vektor2D(5, 5);
+        Vektor2D vek4 = new Vektor2D(5, 5.001);
+        assertFalse(vek3.isEqual(vek4));
     }
 
     @Test
@@ -104,6 +126,9 @@ public class Tests {
         Vektor3D vek = new Vektor3D(Double.MAX_VALUE, 5, 3);
         Vektor2D vek2 = new Vektor2D(Double.MAX_VALUE, 5);
         assertTrue(vek.isNotEqual(vek2));
+        Vektor2D vek3 = new Vektor2D(5, 5);
+        Vektor2D vek4 = new Vektor2D(5, 5.001);
+        assertTrue(vek3.isNotEqual(vek4));
     }
 
     @Test
@@ -111,6 +136,8 @@ public class Tests {
         Vektor3D vek = new Vektor3D(Double.MAX_VALUE, 5, 3);
         Vektor2D vek2 = new Vektor2D(Double.MAX_VALUE, 5);
         assertFalse(vek.isSameDimension(vek2));
+        Vektor3D vek3 = new Vektor3D(Double.MAX_VALUE, 5, 3);
+        assertTrue(vek.isSameDimension(vek3));
     }
 
     @Test
@@ -122,9 +149,12 @@ public class Tests {
 
     @Test
     public void testLength() throws VektorOverflowException {
-        Vektor2D vek2 = new Vektor2D(54, -34);
-        vek2.length();
-        System.out.println(vek2.length());
+        Vektor2D vek = new Vektor2D(5, 3);
+        Vektor3D vek2 = new Vektor3D(1, -4, 6);
+        double exp = Math.sqrt(34);
+        double exp2 = Math.sqrt(53);
+        assertEquals(exp, vek.length(), 0);
+        assertEquals(exp2, vek2.length(), 0);
     }
 
     @Test
@@ -136,17 +166,20 @@ public class Tests {
 
     @Test
     public void testNormalize() throws VektorOverflowException {
-        Vektor2D vek2 = new Vektor2D(54, -34);
+        Vektor2D vek2 = new Vektor2D(Double.MIN_VALUE, -34);
+        Vektor3D vek3 = new Vektor3D(2, -34, 3);
         vek2.normalize();
-        System.out.println(vek2.length());
+        vek3.normalize();
+        assertEquals(1, vek2.length(), 0);
+        assertEquals(1, vek3.length(), 0);
     }
 
     @Test
     public void testNegation() {
         Vektor2D vek2 = new Vektor2D(-1, -34);
         vek2.negiere();
-        assertEquals(1, vek2.getX(),0);
-        assertEquals(34, vek2.getY(),0);
+        assertEquals(1, vek2.getX(), 0);
+        assertEquals(34, vek2.getY(), 0);
         System.out.println(vek2);
     }
 
@@ -154,8 +187,8 @@ public class Tests {
     public void testAddCoords() throws VektorOverflowException {
         Vektor2D vek2 = new Vektor2D(-1, -34);
         double wert = vek2.addCoords();
-        System.out.println(wert);
+        double exp = -35;
+        assertEquals(exp, wert, 0);
     }
-
 
 }
