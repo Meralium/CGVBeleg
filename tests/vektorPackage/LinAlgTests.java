@@ -3,6 +3,7 @@ package vektorPackage;
 import exceptions.VektorOverflowException;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
+import org.omg.CORBA.DoubleHolder;
 import vektorPackage.Vektor2D;
 import vektorPackage.Vektor3D;
 import org.junit.Test;
@@ -15,9 +16,21 @@ public class LinAlgTests {
     public ExpectedException expectedException = ExpectedException.none();
 
     @Test
-    public void testeAddition() throws VektorOverflowException {
+    public void testeAdditionWithException() throws VektorOverflowException {
         expectedException.expect(VektorOverflowException.class);
         LineareAlgebra.add(new Vektor2D(Double.MAX_VALUE, 1), new Vektor2D(2, 2));
+    }
+
+    @Test
+    public void testeAddition() throws VektorOverflowException {
+        double[] exp = {34, 3, -32.543};
+        assertArrayEquals(exp, (LineareAlgebra.add(new Vektor3D(32, 1, -0.543), new Vektor3D(2, 2, -32))).getVek(), 0);
+    }
+
+    @Test
+    public void testeSubtrWithException() throws VektorOverflowException {
+        expectedException.expect(VektorOverflowException.class);
+        LineareAlgebra.sub(new Vektor2D(-Double.MAX_VALUE, 1), new Vektor2D(2, 2));
     }
 
     @Test
@@ -29,6 +42,13 @@ public class LinAlgTests {
     }
 
     @Test
+    public void testeMultWithException() throws VektorOverflowException {
+        expectedException.expect(VektorOverflowException.class);
+        double wert = -1.01;
+        Vektor2D vek = (Vektor2D) LineareAlgebra.mult(new Vektor2D(Double.MAX_VALUE, 1), wert);
+    }
+
+    @Test
     public void testeMult() throws VektorOverflowException {
         double wert = -3;
         Vektor3D vek = (Vektor3D) LineareAlgebra.mult(new Vektor3D(43, 1, -18), wert);
@@ -36,6 +56,28 @@ public class LinAlgTests {
         assertEquals(vek.getX(), vek2.getX(), 0);
         assertEquals(vek.getY(), vek2.getY(), 0);
         assertEquals(vek.getZ(), vek2.getZ(), 0);
+    }
+
+    @Test
+    public void testeDividWithException() throws VektorOverflowException {
+        expectedException.expect(VektorOverflowException.class);
+        double wert = -Double.MIN_VALUE;
+        Vektor2D vek = (Vektor2D) LineareAlgebra.div(new Vektor2D(Double.MAX_VALUE, 1), wert);
+        LineareAlgebra.show(vek);
+    }
+
+    @Test
+    public void testeDividWithException2() throws VektorOverflowException {
+        double wert = -Double.MAX_VALUE;
+        Vektor2D vek = (Vektor2D) LineareAlgebra.div(new Vektor2D(0.356745, 1), wert);
+        LineareAlgebra.show(vek);
+    }
+
+    @Test
+    public void test() throws VektorOverflowException {
+        double wert = 12;
+        double wert2 = 0.12;
+        System.out.println(wert + wert2);
     }
 
     @Test

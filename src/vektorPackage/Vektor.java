@@ -25,7 +25,7 @@ public abstract class Vektor {
 
     /*----------------------------------------------------*/
 
-    /*-----------------'klassische' class-level Funktionen*/
+    /*----------------------------- class-level Funktionen*/
     abstract public Vektor getClone();
 
     @Override
@@ -79,7 +79,7 @@ public abstract class Vektor {
         return res;
     }
 
-/*----------------------------------------------------*/
+    /*----------------------------------------------------*/
 
     /*------------------------------------Beleg-Funktionen*/
 
@@ -146,12 +146,12 @@ public abstract class Vektor {
 
     /*----------------------------------------------------*/
 
-    /*----------------------------------private Funktionen*/
+    /*-----------------------------------static Funktionen*/
     public static double mult2Doubles(double aktuelleZahl, double multiplikand) throws VektorOverflowException {
-        if (Math.abs(aktuelleZahl) != 0 && (Double.MAX_VALUE / Math.abs(aktuelleZahl) < multiplikand)) {
+        if (Math.abs(aktuelleZahl) != 0 && (Double.MAX_VALUE / Math.abs(aktuelleZahl) < Math.abs(multiplikand))) {
             throw new VektorOverflowException();
         }
-        if (Math.abs(1 / multiplikand) < 1 && (aktuelleZahl / Double.MAX_VALUE > Math.abs(multiplikand))) {
+        if (Math.abs(1 / multiplikand) < 1 && (Math.abs(aktuelleZahl) / Double.MAX_VALUE > Math.abs(multiplikand))) {
             throw new VektorOverflowException();
         }
         return aktuelleZahl * multiplikand;

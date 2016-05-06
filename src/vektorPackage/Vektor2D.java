@@ -12,7 +12,7 @@ public class Vektor2D extends Vektor {
     }
 
     public Vektor getClone() {
-        return new Vektor2D(getX(),getY());
+        return new Vektor2D(getX(), getY());
     }
 
     public void setPosition(double x, double y) {

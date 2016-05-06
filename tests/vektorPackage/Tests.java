@@ -94,12 +94,12 @@ public class Tests {
     @Test
     public void testDivisionWithException() throws VektorOverflowException {
         expectedException.expect(VektorOverflowException.class);
-        Vektor2D vek = new Vektor2D(5, 5);
-        vek.div(0);
+        Vektor2D vek = new Vektor2D(Double.MIN_VALUE, 5);
+        vek.div(Double.MIN_VALUE);
     }
 
     @Test
-    public void testDivision2() throws VektorOverflowException {
+    public void testDivision() throws VektorOverflowException {
         Vektor2D vek = new Vektor2D(5, -5);
         vek.div(-2);
         assertEquals(-2.5, vek.getX(), 0);
