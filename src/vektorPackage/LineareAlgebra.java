@@ -1,8 +1,6 @@
 package vektorPackage;
 
 import exceptions.VektorOverflowException;
-import vektorPackage.Vektor;
-import vektorPackage.Vektor2D;
 
 public class LineareAlgebra {
 

@@ -1,10 +1,7 @@
 package vektorPackage;
 
 import exceptions.VektorOverflowException;
-
 import java.util.Arrays;
-import java.util.Map;
-
 
 public abstract class Vektor {
 

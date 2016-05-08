@@ -3,9 +3,6 @@ package vektorPackage;
 import exceptions.VektorOverflowException;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
-import org.omg.CORBA.DoubleHolder;
-import vektorPackage.Vektor2D;
-import vektorPackage.Vektor3D;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
