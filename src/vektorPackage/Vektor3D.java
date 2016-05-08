@@ -1,3 +1,7 @@
+/*Erstellt von:
+* Anja Handrianz (s72812)
+* Artem Dyadichkin (s72788)*/
+
 package vektorPackage;
 
 public class Vektor3D extends Vektor {
