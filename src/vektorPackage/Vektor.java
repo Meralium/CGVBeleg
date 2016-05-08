@@ -14,15 +14,11 @@ public abstract class Vektor {
 
     public Vektor(int dimension) {
         this.vek = new double[dimension];
-        /*gleich mit null initialisieren?
-        * for(int i = 0; i < laenge; i++) {
-        *   this.vek[i] = 0;
-        * }*/
     }
 
     /*----------------------------------------------------*/
 
-    /*----------------------------- class-level Funktionen*/
+    /*---------------------------------- eigene Funktionen*/
     abstract public Vektor getClone();
 
     @Override
@@ -144,6 +140,7 @@ public abstract class Vektor {
     /*----------------------------------------------------*/
 
     /*-----------------------------------static Funktionen*/
+
     public static double mult2Doubles(double aktuelleZahl, double multiplikand) throws VektorOverflowException {
         if (Math.abs(aktuelleZahl) != 0 && (Double.MAX_VALUE / Math.abs(aktuelleZahl) < Math.abs(multiplikand))) {
             throw new VektorOverflowException();

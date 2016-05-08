@@ -4,6 +4,8 @@ import exceptions.VektorOverflowException;
 
 public class LineareAlgebra {
 
+    /*-----------------------------------static Funktionen*/
+
     public static Vektor add(Vektor vektor1, Vektor vektor2) throws VektorOverflowException {
         return vektor1.getClone().add(vektor2);
     }
@@ -127,5 +129,7 @@ public class LineareAlgebra {
     public static boolean areOrthogonal(Vektor3D vektor1, Vektor3D vektor2) throws VektorOverflowException {
         return LineareAlgebra.dotProduct(vektor1, vektor2) == 0;
     }
+
+    /*----------------------------------------------------*/
 
 }

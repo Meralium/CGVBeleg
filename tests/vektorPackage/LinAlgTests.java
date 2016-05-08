@@ -247,6 +247,15 @@ public class LinAlgTests {
     }
 
     @Test
+    public void testeDegreeToRad() throws VektorOverflowException {
+        Vektor2D vek = new Vektor2D(2, 2);
+        Vektor2D vek1 = new Vektor2D(0, 3);
+        double res = Math.floor(LineareAlgebra.angleDegree(vek, vek1) * 1e3) / 1e3;
+        res = LineareAlgebra.degreeToRad(res);
+        assertEquals(Math.PI/4, res, 0);
+    }
+
+    @Test
     public void testDeterminate() throws VektorOverflowException {
         Vektor3D vek = new Vektor3D(0, 3, 1);
         Vektor3D vek1 = new Vektor3D(1, 2, 1);
