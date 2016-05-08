@@ -126,7 +126,7 @@ public class LineareAlgebra {
         System.out.println(vektor.toString());
     }
 
-    public static boolean areOrthogonal(Vektor3D vektor1, Vektor3D vektor2) throws VektorOverflowException{
+    public static boolean areOrthogonal(Vektor3D vektor1, Vektor3D vektor2) throws VektorOverflowException {
         return LineareAlgebra.dotProduct(vektor1, vektor2) == 0;
     }
 

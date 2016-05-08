@@ -74,7 +74,7 @@ public abstract class Vektor {
         double res = 0;
         for (double i :
                 this.getVek()) {
-            res = add2Doubles(res,i);
+            res = add2Doubles(res, i);
         }
         return res;
     }
