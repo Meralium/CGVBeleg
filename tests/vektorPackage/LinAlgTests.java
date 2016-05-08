@@ -113,13 +113,20 @@ public class LinAlgTests {
     }
 
     @Test
+    public void testLengthWithException() throws VektorOverflowException {
+        expectedException.expect(VektorOverflowException.class);
+        Vektor3D vek = new Vektor3D(Double.MAX_VALUE, 2, 1);
+        LineareAlgebra.length(vek);
+    }
+
+    @Test
     public void testeLength() throws VektorOverflowException {
-        Vektor2D vek1 = new Vektor2D(-54.23, 23);
-        Vektor3D vek2 = new Vektor3D(-2, 3.43, -4.0004);
-        double vek1Length = LineareAlgebra.length(vek1);
-        double vek2Length = LineareAlgebra.length(vek2);
-        System.out.println(vek1Length);
-        System.out.println(vek2Length);
+        Vektor2D vek1 = new Vektor2D(5, 3);
+        Vektor3D vek2 = new Vektor3D(1, -4, 6);
+        double exp = Math.sqrt(34);
+        double exp2 = Math.sqrt(53);
+        assertEquals(exp, LineareAlgebra.length(vek1), 0);
+        assertEquals(exp2, LineareAlgebra.length(vek2), 0);
     }
 
     @Test
@@ -130,10 +137,10 @@ public class LinAlgTests {
     }
 
     @Test
-    public void testeEuklDistance() throws VektorOverflowException {
+    public void testeEuklDistanceWithException() throws VektorOverflowException {
         expectedException.expect(VektorOverflowException.class);
-        Vektor2D vek1 = new Vektor2D(Double.MAX_VALUE, -3.5433);
-        Vektor2D vek2 = new Vektor2D(2.5, 3);
+        Vektor2D vek1 = new Vektor2D(2, -3.5433);
+        Vektor3D vek2 = new Vektor3D(2.5, 3, 3);
         double res = LineareAlgebra.euklDistance(vek1, vek2);
         System.out.println(res);
     }
@@ -141,9 +148,18 @@ public class LinAlgTests {
     @Test
     public void testeManhattanlDistance() throws VektorOverflowException {
         Vektor2D vek1 = new Vektor2D(5, -4);
-        Vektor2D vek2 = new Vektor2D(2, 3);
+        Vektor2D vek2 = new Vektor2D(Double.MIN_VALUE, 3);
         double res = LineareAlgebra.manhattanDistance(vek1, vek2);
-        assertEquals(10, res, 0);
+        assertEquals(12, res, 0);
+        System.out.println(res);
+    }
+
+    @Test
+    public void testeManhattanlDistanceWithException() throws VektorOverflowException {
+        expectedException.expect(VektorOverflowException.class);
+        Vektor2D vek1 = new Vektor2D(Double.MAX_VALUE, -4);
+        Vektor2D vek2 = new Vektor2D(-3, 3);
+        double res = LineareAlgebra.manhattanDistance(vek1, vek2);
         System.out.println(res);
     }
 
@@ -151,6 +167,8 @@ public class LinAlgTests {
     public void testeAbs() {
         Vektor2D vek1 = new Vektor2D(-Double.MAX_VALUE, -4.212);
         LineareAlgebra.abs(vek1);
+        assertEquals(Double.MAX_VALUE, vek1.getX(), 0);
+        assertEquals(4.212, vek1.getY(), 0);
         System.out.println(vek1.toString());
     }
 
@@ -159,7 +177,7 @@ public class LinAlgTests {
         Vektor2D vek = new Vektor2D(1, 2);
         Vektor2D vek1 = new Vektor2D(-7, 8);
         double expected = 22;
-        double res = LineareAlgebra.crossProduct2D(vek, vek1);
+        double res = LineareAlgebra.crossProduct(vek, vek1);
         System.out.println(res);
         assertEquals(expected, res, 0);
     }
@@ -169,21 +187,37 @@ public class LinAlgTests {
         Vektor3D vek = new Vektor3D(1, 2, 3);
         Vektor3D vek1 = new Vektor3D(-7, 8, 9);
         Vektor3D expected = new Vektor3D(-6, -30, 22);
-        Vektor3D res = LineareAlgebra.crossProduct3D(vek, vek1);
+        Vektor3D res = LineareAlgebra.crossProduct(vek, vek1);
         System.out.println(res.toString());
         assertArrayEquals(expected.getVek(), res.getVek(), 0);
     }
 
     @Test
-    public void testeDotProduct() throws VektorOverflowException {
-        Vektor2D vek = new Vektor2D(32, 2);
-        Vektor2D vek1 = new Vektor2D(-7, 9);
+    public void testeDotProductWithException() throws VektorOverflowException {
+        expectedException.expect(VektorOverflowException.class);
+        Vektor2D vek = new Vektor2D(2, -3);
+        Vektor3D vek1 = new Vektor3D(-4, 2, 6);
         double res = LineareAlgebra.dotProduct(vek1, vek);
-        System.out.println(res);
     }
 
     @Test
-    public void testecosEquation () throws VektorOverflowException {
+    public void testeDotProductWithException2() throws VektorOverflowException {
+        expectedException.expect(VektorOverflowException.class);
+        Vektor3D vek = new Vektor3D(2, -3, 5);
+        Vektor3D vek1 = new Vektor3D(-Double.MAX_VALUE, 2, 6);
+        double res = LineareAlgebra.dotProduct(vek1, vek);
+    }
+
+    @Test
+    public void testeDotProduct() throws VektorOverflowException {
+        Vektor2D vek = new Vektor2D(2, -3);
+        Vektor2D vek1 = new Vektor2D(-4, 2);
+        double res = LineareAlgebra.dotProduct(vek1, vek);
+        assertEquals(-14, res, 0);
+    }
+
+    @Test
+    public void testecosEquation() throws VektorOverflowException {
         Vektor3D vek = new Vektor3D(20, 8, 4);
         Vektor3D vek1 = new Vektor3D(6, 3, 2);
         double res = LineareAlgebra.cosEquation(vek, vek1);
@@ -191,7 +225,7 @@ public class LinAlgTests {
     }
 
     @Test
-    public void testeSinEquation () throws VektorOverflowException {
+    public void testeSinEquation() throws VektorOverflowException {
         Vektor3D vek = new Vektor3D(20, 8, 4);
         Vektor3D vek1 = new Vektor3D(6, 3, 2);
         double res = LineareAlgebra.sinEquation(vek, vek1);
@@ -199,31 +233,37 @@ public class LinAlgTests {
     }
 
     @Test
-    public void testAngleRad() throws VektorOverflowException{
-        Vektor3D vek = new Vektor3D(20.239, -8, 4);
-        Vektor3D vek1 = new Vektor3D(6, 3.32, -4);
-        double res = LineareAlgebra.angleRad(vek, vek1);
-        System.out.println(res);
-        Vektor2D vek2 = new Vektor2D(3,0);
-        Vektor2D vek3 = new Vektor2D(5,5);
-        res = LineareAlgebra.angleRad(vek2, vek3);
-        System.out.println(res);
+    public void testAngleRad() throws VektorOverflowException {
+        Vektor3D vek = new Vektor3D(2, 4, -5);
+        Vektor3D vek1 = new Vektor3D(-1, 3, -2);
+        double res = Math.floor(LineareAlgebra.angleRad(vek, vek1) * 1e3) / 1e3;
+        double exp = 0.648;
+        assertEquals(exp, res, 0);
     }
 
     @Test
-    public void testAngleDegree() throws VektorOverflowException{
-        Vektor3D vek = new Vektor3D(3, 0, 0);
-        Vektor3D vek1 = new Vektor3D(5, 5, 0);
-        double res = LineareAlgebra.angleDegree(vek, vek1);
-        System.out.println(res);
+    public void testAngleDegree() throws VektorOverflowException {
+        Vektor2D vek = new Vektor2D(2, 2);
+        Vektor2D vek1 = new Vektor2D(0, 3);
+        double res = Math.floor(LineareAlgebra.angleDegree(vek, vek1)* 1e3) / 1e3;
+        assertEquals(45, res, 0);
     }
 
     @Test
-    public void testDeterminate() throws VektorOverflowException{
+    public void testDeterminate() throws VektorOverflowException {
         Vektor3D vek = new Vektor3D(0, 3, 1);
         Vektor3D vek1 = new Vektor3D(1, 2, 1);
         Vektor3D vek2 = new Vektor3D(2, 1, 0);
         double res = LineareAlgebra.determinate(vek, vek1, vek2);
-        System.out.println(res);
+        double exp = 3;
+        assertEquals(exp, res, 0);
+    }
+
+    @Test
+    public void testOrthogonal() throws VektorOverflowException {
+        Vektor3D vek = new Vektor3D(6, 2, -1);
+        Vektor3D vek1 = new Vektor3D(2, -7, -2);
+        boolean res = LineareAlgebra.areOrthogonal(vek1, vek);
+        assertTrue(res);
     }
 }

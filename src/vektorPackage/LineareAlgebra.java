@@ -46,11 +46,11 @@ public class LineareAlgebra {
         return (LineareAlgebra.abs(vektor1.sub(vektor2))).addCoords();
     }
 
-    public static double crossProduct2D(Vektor2D vektor1, Vektor2D vektor2) throws VektorOverflowException {
+    public static double crossProduct(Vektor2D vektor1, Vektor2D vektor2) throws VektorOverflowException {
         return Vektor.add2Doubles(Vektor.mult2Doubles(vektor1.getX(), vektor2.getY()), -Vektor.mult2Doubles(vektor1.getY(), vektor2.getX()));
     }
 
-    public static Vektor3D crossProduct3D(Vektor3D vektor1, Vektor3D vektor2) throws VektorOverflowException {
+    public static Vektor3D crossProduct(Vektor3D vektor1, Vektor3D vektor2) throws VektorOverflowException {
         Vektor3D res = new Vektor3D();
         Vektor3D res1 = new Vektor3D();
         for (int i = 1; i < vektor1.getVek().length + 1; i++) {
@@ -61,6 +61,7 @@ public class LineareAlgebra {
     }
 
     public static double dotProduct(Vektor vektor1, Vektor vektor2) throws VektorOverflowException {
+        if (!vektor1.isSameDimension(vektor2)) throw new VektorOverflowException();
         double res = 0;
         for (int i = 0; i < vektor1.getVek().length; i++) {
             res = Vektor.add2Doubles(res, Vektor.mult2Doubles(vektor1.getVek()[i], vektor2.getVek()[i]));
@@ -69,22 +70,26 @@ public class LineareAlgebra {
     }
 
     public static double cosEquation(Vektor vektor1, Vektor vektor2) throws VektorOverflowException {
+        if (!vektor1.isSameDimension(vektor2)) throw new VektorOverflowException();
         return Vektor.mult2Doubles(LineareAlgebra.dotProduct(vektor1, vektor2),
                 1 / (Vektor.mult2Doubles(vektor1.length(), vektor2.length())));
     }
 
     public static double sinEquation(Vektor3D vektor1, Vektor3D vektor2) throws VektorOverflowException {
-        return Vektor.mult2Doubles((LineareAlgebra.crossProduct3D(vektor1, vektor2)).length(),
+        if (!vektor1.isSameDimension(vektor2)) throw new VektorOverflowException();
+        return Vektor.mult2Doubles((LineareAlgebra.crossProduct(vektor1, vektor2)).length(),
                 1 / (Vektor.mult2Doubles(vektor1.length(), vektor2.length())));
     }
 
     public static double angleRad(Vektor vektor1, Vektor vektor2) throws VektorOverflowException {
+        if (!vektor1.isSameDimension(vektor2)) throw new VektorOverflowException();
         return Math.acos(LineareAlgebra.cosEquation(vektor1, vektor2));
-    } /*nothing FOR 2D*/
+    }
 
-    public static double angleDegree(Vektor3D vektor1, Vektor3D vektor2) throws VektorOverflowException {
+    public static double angleDegree(Vektor vektor1, Vektor vektor2) throws VektorOverflowException {
+        if (!vektor1.isSameDimension(vektor2)) throw new VektorOverflowException();
         return radToDegree(LineareAlgebra.angleRad(vektor1, vektor2));
-    } /*nothing FOR 2D*/
+    }
 
     public static double degreeToRad(double degree) throws VektorOverflowException {
         return Vektor.mult2Doubles(degree, Math.PI / 180);
@@ -95,7 +100,7 @@ public class LineareAlgebra {
     }
 
     public static double determinate(Vektor2D vektor1, Vektor2D vektor2) throws VektorOverflowException {
-        return crossProduct2D(vektor1, vektor2);
+        return crossProduct(vektor1, vektor2);
     }
 
     public static double determinate(Vektor3D vektor1, Vektor3D vektor2, Vektor3D vektor3) throws VektorOverflowException {
@@ -103,9 +108,9 @@ public class LineareAlgebra {
         double res2 = 0;
         for (int i = 1; i < vektor1.getVek().length + 1; i++) {
             res1 += Vektor.mult2Doubles(Vektor.mult2Doubles(vektor1.getVek()[(i - 1) % 3], vektor2.getVek()[i % 3]),
-                                        vektor3.getVek()[(i + 1) % 3]);
+                    vektor3.getVek()[(i + 1) % 3]);
             res2 -= Vektor.mult2Doubles(Vektor.mult2Doubles(vektor1.getVek()[i % 3], vektor2.getVek()[(i + 2) % 3]),
-                                        vektor3.getVek()[(i + 1) % 3]);
+                    vektor3.getVek()[(i + 1) % 3]);
         }
         return Vektor.add2Doubles(res1, res2);
     }
@@ -119,6 +124,10 @@ public class LineareAlgebra {
 
     public static void show(Vektor vektor) {
         System.out.println(vektor.toString());
+    }
+
+    public static boolean areOrthogonal(Vektor3D vektor1, Vektor3D vektor2) throws VektorOverflowException{
+        return LineareAlgebra.dotProduct(vektor1, vektor2) == 0;
     }
 
 }
