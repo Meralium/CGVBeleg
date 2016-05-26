@@ -15,6 +15,12 @@ public class Vektor2D extends Vektor {
         super.setPosition(x, y);
     }
 
+    public Vektor2D(Vektor2D vek) {
+        super(2);
+        this.setX(vek.getX());
+        this.setY(vek.getY());
+    }
+
     public Vektor getClone() {
         return new Vektor2D(getX(), getY());
     }

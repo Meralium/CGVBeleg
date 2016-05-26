@@ -15,6 +15,13 @@ public class Vektor3D extends Vektor {
         super.setPosition(x, y, z);
     }
 
+    public Vektor3D(Vektor3D vek) {
+        super(3);
+        this.setX(vek.getX());
+        this.setY(vek.getY());
+        this.setZ(vek.getZ());
+    }
+
     public void setPosition(double x, double y, double z) {
         super.setPosition(x, y, z);
     }
