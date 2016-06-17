@@ -20,8 +20,8 @@ public abstract class BasisFenster {
 
     public void initDisplay() {
         try {
-            Display.setDisplayMode(new DisplayMode(getWidth(), getHeight()));
-            Display.setTitle(title);
+            Display.setDisplayMode(new DisplayMode(this.getWidth(), this.getHeight()));
+            Display.setTitle(this.title);
             Display.create();
         } catch (LWJGLException e) {
             e.printStackTrace();
