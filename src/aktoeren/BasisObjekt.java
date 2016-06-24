@@ -24,11 +24,16 @@ public abstract class BasisObjekt {
         return id;
     }
 
-    public BasisObjekt() {
-        this(new Vektor2D(0, 0));
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public BasisObjekt(Vektor2D position) {
+    public BasisObjekt() {
+        this(0, new Vektor2D(0, 0));
+    }
+
+    public BasisObjekt(int id, Vektor2D position) {
+        this.id = id;
         this.position = position;
         this.xPos = (float) this.position.getX();
         this.yPos = (float) this.position.getY();

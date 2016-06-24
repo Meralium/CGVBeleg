@@ -18,8 +18,8 @@ public abstract class BewegendesObjekt extends BasisObjekt {
         setVerhalten(new VerhaltenYBewegung(this));
     }
 
-    public BewegendesObjekt(Vektor2D position, Vektor2D velocity) {
-        super(position);
+    public BewegendesObjekt(int id, Vektor2D position, Vektor2D velocity) {
+        super(id, position);
         this.velocity = new Vektor2D(velocity);
     }
 

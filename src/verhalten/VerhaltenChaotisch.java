@@ -4,18 +4,25 @@ import aktoeren.BewegendesObjekt;
 import exceptions.VektorOverflowException;
 import vektorPackage.Vektor2D;
 
-public class VerhaltenYBewegung implements Verhalten {
+import java.util.concurrent.ThreadLocalRandom;
+
+/**
+ * Created by Meralium on 24.06.16.
+ */
+public class VerhaltenChaotisch implements Verhalten {
     protected BewegendesObjekt objekt;
 
-    public VerhaltenYBewegung(BewegendesObjekt objekt) {
+    public VerhaltenChaotisch(BewegendesObjekt objekt) {
         this.objekt = objekt;
     }
 
-    public VerhaltenYBewegung() {
+    public VerhaltenChaotisch() {
     }
 
+    @Override
     public void update() {
         try {
+            objekt.setVelocity(new Vektor2D(ThreadLocalRandom.current().nextDouble(0.5,30.0),ThreadLocalRandom.current().nextDouble(0.5,30.0)));
             objekt.setPosition((Vektor2D) objekt.getPosition().add(objekt.getVelocity()));
         } catch (VektorOverflowException e) {
             e.printStackTrace();
