@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 import frame.Szene;
 import vektorPackage.Vektor2D;
 import verhalten.VerhaltenYBewegung;
+import verhalten.VerhaltenYBewegungMitWind;
 
 public class WeltEinesObjektes extends Szene {
     public Kreis kreis;
@@ -11,7 +12,7 @@ public class WeltEinesObjektes extends Szene {
     public WeltEinesObjektes(){
         super();
         this.kreis = new Kreis(50, new Vektor2D(30, 40), new Vektor2D(0, 1));
-        this.kreis.setVerhalten(new VerhaltenYBewegung(this.kreis));
+        this.kreis.setVerhalten(new VerhaltenYBewegungMitWind(this.kreis));
     }
 
     public void renderLoop() {

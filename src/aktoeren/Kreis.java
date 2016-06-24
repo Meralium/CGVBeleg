@@ -15,7 +15,7 @@ public class Kreis extends BewegendesObjekt {
         this.radius = 10;
     }
 
-    public Kreis(float radius, Vektor2D position, Vektor2D velocity){
+    public Kreis(float radius, Vektor2D position, Vektor2D velocity) {
         super(position, velocity);
         this.radius = radius;
     }
@@ -26,8 +26,8 @@ public class Kreis extends BewegendesObjekt {
         glColor3d(1, 0, 0);
         glBegin(GL_TRIANGLE_FAN);
         glVertex2f(xPos, yPos);
-        for (int angle=0; angle<360; angle+=5) {
-            glVertex2f(xPos + (float)Math.sin(angle) * 10, yPos + (float)Math.cos(angle) * 10);
+        for (int angle = 0; angle < 360; angle += 1) {
+            glVertex2f(xPos + (float) Math.sin(angle) * 10, yPos + (float) Math.cos(angle) * 10);
         }
         glEnd();
     }
