@@ -1,25 +1,22 @@
-import aktoeren.BewegendesObjekt;
 import aktoeren.Kreis;
 import frame.Szene;
 import objektManager.KreiseManager;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import vektorPackage.Vektor2D;
-import verhalten.Verhalten;
-import verhalten.VerhaltenChaotisch;
 import verhalten.VerhaltenYBewegung;
 import verhalten.VerhaltenYBewegungMitWind;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class WeltMehrerenKreisen extends Szene {
+public class WeltMehrererKreise extends Szene {
     //public Kreis kreis;
     public KreiseManager kreiseManager;
 
-    public WeltMehrerenKreisen() {
+    public WeltMehrererKreise() {
         super();
         kreiseManager = new KreiseManager();
-        generiereKreise(100);
+        generiereKreise(200);
         initialisiereVerhaltenFuerAlle();
         //this.kreis = new Kreis(50, new Vektor2D(30, 40), new Vektor2D(0, 1));
         //this.kreis.setVerhalten(new VerhaltenYBewegungMitWind(this.kreis));
@@ -27,7 +24,7 @@ public class WeltMehrerenKreisen extends Szene {
 
     private void initialisiereVerhaltenFuerAlle() {
         for (int i = 0; i < kreiseManager.getAnzahlAllerKreisen(); i++) {
-            kreiseManager.getKreis(i).setVerhalten(new VerhaltenYBewegung(kreiseManager.getKreis(i)));
+            kreiseManager.getKreis(i).setVerhalten(new VerhaltenYBewegungMitWind(kreiseManager.getKreis(i)));
         }
     }
 
@@ -35,7 +32,7 @@ public class WeltMehrerenKreisen extends Szene {
         for (int i = 0; i < anzahl; i++) {
             this.kreiseManager.registriereKreis(new Kreis(i, (float)ThreadLocalRandom.current().nextDouble(0.2,10.0),
                     new Vektor2D(ThreadLocalRandom.current().nextDouble(0.0, 800.0), ThreadLocalRandom.current().nextDouble(0.0, 600.0)),
-                    new Vektor2D(ThreadLocalRandom.current().nextDouble(0.0, 2.0),1)));
+                    new Vektor2D(0,3)));
         }
     }
 
@@ -60,7 +57,7 @@ public class WeltMehrerenKreisen extends Szene {
     }
 
     public static void main(String[] args) {
-        (new WeltMehrerenKreisen()).start();
+        (new WeltMehrererKreise()).start();
     }
 
 }

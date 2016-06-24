@@ -2,13 +2,16 @@ package verhalten;
 
 import aktoeren.BewegendesObjekt;
 import exceptions.VektorOverflowException;
+import vektorPackage.Vektor;
 import vektorPackage.Vektor2D;
 
 public class VerhaltenYBewegung implements Verhalten {
     protected BewegendesObjekt objekt;
+    private Vektor2D yBewegung;
 
     public VerhaltenYBewegung(BewegendesObjekt objekt) {
         this.objekt = objekt;
+        this.yBewegung = new Vektor2D(0, 1);
     }
 
     public VerhaltenYBewegung() {
@@ -16,15 +19,12 @@ public class VerhaltenYBewegung implements Verhalten {
 
     public void update() {
         try {
-            objekt.setPosition((Vektor2D) objekt.getPosition().add(objekt.getVelocity()));
+            objekt.setPosition((Vektor2D) objekt.getPosition().add(yBewegung));
         } catch (VektorOverflowException e) {
             e.printStackTrace();
         }
         if (objekt.yPos >= 500 || objekt.yPos <= 0) {
-            objekt.getVelocity().setY(objekt.getVelocity().getY() * -1);
-        }
-        if (objekt.xPos >= 600 || objekt.xPos <= 0) {
-            objekt.getVelocity().setX(objekt.getVelocity().getX() * -1);
+            yBewegung.setY(yBewegung.getY() * -1);
         }
     }
 }

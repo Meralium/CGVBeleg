@@ -1,4 +1,4 @@
-import aktoeren.Kreis;
+/*import aktoeren.Kreis;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import frame.Szene;
@@ -34,4 +34,4 @@ public class WeltEinesObjektes extends Szene {
         (new WeltEinesObjektes()).start();
     }
 
-}
+}*/

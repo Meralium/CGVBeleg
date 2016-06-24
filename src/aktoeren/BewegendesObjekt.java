@@ -5,6 +5,7 @@ import verhalten.Verhalten;
 import verhalten.VerhaltenYBewegung;
 
 public abstract class BewegendesObjekt extends BasisObjekt {
+
     public Vektor2D getVelocity() {
         return velocity;
     }
