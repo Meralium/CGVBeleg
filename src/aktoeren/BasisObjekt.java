@@ -16,8 +16,14 @@ public abstract class BasisObjekt {
 
     public void setPosition(Vektor2D position) {
         this.position.setPosition(position.getX(), position.getY());
-        this.xPos = (float) this.position.getX();
-        this.yPos = (float) this.position.getY();
+        this.xPos = (float) position.getX();
+        this.yPos = (float) position.getY();
+    }
+
+    public void setPosition(double x, double y) {
+        this.position.setPosition(x, y);
+        this.xPos = (float) x;
+        this.yPos = (float) y;
     }
 
     public int getId() {
@@ -34,7 +40,7 @@ public abstract class BasisObjekt {
 
     public BasisObjekt(int id, Vektor2D position) {
         this.id = id;
-        this.position = position;
+        this.position = new Vektor2D(position);
         this.xPos = (float) this.position.getX();
         this.yPos = (float) this.position.getY();
     }

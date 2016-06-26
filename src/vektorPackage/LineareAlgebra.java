@@ -43,7 +43,7 @@ public class LineareAlgebra {
     }
 
     public static double euklDistance(Vektor vektor1, Vektor vektor2) throws VektorOverflowException {
-        return (vektor1.sub(vektor2)).length();
+        return (sub(vektor1,vektor2).length());
     }
 
     public static double manhattanDistance(Vektor vektor1, Vektor vektor2) throws VektorOverflowException {

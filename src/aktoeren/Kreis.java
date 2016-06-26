@@ -14,7 +14,7 @@ public class Kreis extends BewegendesObjekt {
     private double r, g, b;
 
     public Kreis() {
-        super(0, new Vektor2D(50, 50), new Vektor2D(0, 1));
+        super(0, new Vektor2D(50, 50), new Vektor2D(0, 1), 0.1);
         this.radius = 10;
         this.r = 1;
         this.g = 0;
@@ -22,14 +22,14 @@ public class Kreis extends BewegendesObjekt {
     }
 
     public Kreis(int id, double radius, Vektor2D position, Vektor2D velocity) {
-        super(id, position, velocity);
+        super(id, position, velocity, 0.1);
         this.radius = radius;
         this.r = ThreadLocalRandom.current().nextDouble(0, 1);
         this.g = ThreadLocalRandom.current().nextDouble(0, 1);
         this.b = ThreadLocalRandom.current().nextDouble(0, 1);
     }
 
-    //radius = 10
+
     @Override
     public void render() {
         glColor3d(r, g, b);

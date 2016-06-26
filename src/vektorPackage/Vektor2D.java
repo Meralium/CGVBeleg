@@ -29,4 +29,9 @@ public class Vektor2D extends Vektor {
         super.setPosition(x, y);
     }
 
+    public void setPosition(Vektor2D vektor) {
+        super.setPosition(vektor.getX(), vektor.getY());
+    }
+
+
 }

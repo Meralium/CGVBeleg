@@ -57,7 +57,7 @@ public class Tests {
 
     @Test
     public void testAddition() throws VektorOverflowException {
-        Vektor3D vek = new Vektor3D(Double.MAX_VALUE - 1000, 0, 0);
+        Vektor3D vek = new Vektor3D(12, 0, 0);
         Vektor3D vek2 = new Vektor3D(0, 1, 2);
         vek.add(vek2);
         System.out.println(vek.toString());

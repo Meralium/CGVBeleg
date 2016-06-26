@@ -10,7 +10,7 @@ public class KreiseManager {
     private HashMap<Integer, Kreis> kreise = new HashMap();
     private static KreiseManager exemplar = new KreiseManager();
 
-    public KreiseManager() {
+    private KreiseManager() {
     }
 
     public Object clone() throws CloneNotSupportedException {
@@ -37,7 +37,7 @@ public class KreiseManager {
         return this.kreise;
     }
 
-    public int getAnzahlAllerKreisen() {
+    public int getAnzahlAllerKreise() {
         return this.kreise.size();
     }
 
