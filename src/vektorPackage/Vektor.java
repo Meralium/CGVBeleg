@@ -141,6 +141,13 @@ public abstract class Vektor {
         return div(laenge);
     }
 
+    public Vektor truncate(double max) throws VektorOverflowException {
+        if(this.length() > max){
+            this.normalize();
+            this.mult(max);
+        }
+        return this;
+    }
     /*----------------------------------------------------*/
 
     /*-----------------------------------static Funktionen*/

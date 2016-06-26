@@ -23,7 +23,7 @@ public class VerhaltenYBewegung implements Verhalten {
         } catch (VektorOverflowException e) {
             e.printStackTrace();
         }
-        if (objekt.yPos >= 500 || objekt.yPos <= 0) {
+        if (objekt.yPos >= 600 || objekt.yPos <= 0) {
             yBewegung.setY(yBewegung.getY() * -1);
         }
     }
