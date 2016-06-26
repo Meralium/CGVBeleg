@@ -35,7 +35,7 @@ public class VerhaltenSchwarm implements Verhalten {
             Kreis bObj = kreiseManager.getKreis(i);
             try {
                 if (LineareAlgebra.euklDistance(kreis.getPosition(), bObj.getPosition()) < separationDist) {
-                    this.help.setPosition((Vektor2D) LineareAlgebra.sub(kreis.getPosition(),bObj.getPosition()));
+                    this.help.setPosition((Vektor2D) LineareAlgebra.sub(kreis.getPosition(), bObj.getPosition()));
                     double length = help.length();
                     help.normalize();
                     help.div(length);
@@ -44,7 +44,6 @@ public class VerhaltenSchwarm implements Verhalten {
             } catch (VektorOverflowException e) {
                 e.printStackTrace();
             }
-
         }
         return steeringForce;
     }
@@ -94,6 +93,7 @@ public class VerhaltenSchwarm implements Verhalten {
             }
             System.out.println(kreis.getVelocity().getX() + "  " + kreis.getVelocity().getY());
             kreis.setPosition((Vektor2D) LineareAlgebra.add(kreis.getPosition(), kreis.getVelocity()));
+            kreis.setVelocity((Vektor2D) kreis.getVelocity().mult(0.0));
             if (kreis.getPosition().getY() >= 500)
                 kreis.setPosition(600 - kreis.getPosition().getX(), 0.0);
             if (kreis.getPosition().getY() <= 0)
