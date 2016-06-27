@@ -7,12 +7,7 @@ import verhalten.VerhaltenYBewegung;
 
 public abstract class BewegendesObjekt extends BasisObjekt {
 
-    public Vektor2D getVelocity() {
-        return velocity;
-    }
-
     private Verhalten verhalten = null;
-
     private double maxVelocity;
     protected Vektor2D velocity;
 
@@ -20,7 +15,6 @@ public abstract class BewegendesObjekt extends BasisObjekt {
         super();
         this.maxVelocity = 5;
         setVelocity(new Vektor2D(1, 0));
-        setVerhalten(new VerhaltenYBewegung(this));
     }
 
     public BewegendesObjekt(int id, Vektor2D position, Vektor2D velocity, double maxVelocity) {
@@ -35,6 +29,10 @@ public abstract class BewegendesObjekt extends BasisObjekt {
 
     public Verhalten getVerhalten() {
         return this.verhalten;
+    }
+
+    public Vektor2D getVelocity() {
+        return velocity;
     }
 
     public void setVelocity(Vektor2D velocity) {

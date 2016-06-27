@@ -13,16 +13,11 @@ import vektorPackage.Vektor3D;
 
 public class Steuerung {
 
-    private Kreis kreis;
-    public Vektor2D steuerungForce = new Vektor2D();
+    public Vektor2D steuerungForce;
     private KreiseManager kreiseManager = KreiseManager.getExemplar();
     private double separationDist = 100.0;
 
     public Steuerung() {
-    }
-
-    public Steuerung(Kreis kreis) {
-        this.kreis = kreis;
         steuerungForce = new Vektor2D();
     }
 
@@ -30,40 +25,34 @@ public class Steuerung {
         this.steuerungForce.add(LineareAlgebra.div(force, kreis.getMass()));
     }
 
-    public Vektor2D folgeZeil(Kreis kreis) {
+    public Vektor2D folgeMouse(Kreis kreis) {
+        Vektor2D target = new Vektor2D((float) Mouse.getX(), (float) (Display.getDisplayMode().getHeight() - Mouse.getY()));
         try {
-            Vektor2D target = new Vektor2D((float) Mouse.getX(), (float)(Display.getDisplayMode().getHeight() - Mouse.getY()));
-            this.steuerungForce.setPosition(((Vektor2D) LineareAlgebra.sub(target, kreis.getPosition())));
-            this.steuerungForce.normalize();
-            this.steuerungForce.mult(kreis.getMaxVelocity());
-            this.steuerungForce.sub(kreis.getVelocity());
+            target.sub(kreis.getPosition());
         } catch (VektorOverflowException e) {
             e.printStackTrace();
         }
-        return this.steuerungForce;
+        return target;
     }
 
-    public Vektor2D separation(Kreis kreis) {
+    public Vektor2D separation(Kreis kreis) throws VektorOverflowException {
         Vektor2D steeringForce = new Vektor2D(0, 0);
         Vektor2D help = new Vektor2D(0, 0);
         for (int i = 0; i < kreiseManager.getAnzahlAllerKreise(); i++) {
             if (kreis.getId() == i)
                 continue;
             Kreis bObj = kreiseManager.getKreis(i);
-            try {
-                if (LineareAlgebra.euklDistance(kreis.getPosition(), bObj.getPosition()) < separationDist) {
-                    help.setPosition((Vektor2D) LineareAlgebra.sub(kreis.getPosition(), bObj.getPosition()));
-                    double length = help.length();
-                    help.normalize();
-                    help.div(length);
-                    steeringForce.add(help);
-                }
-            } catch (VektorOverflowException e) {
-                e.printStackTrace();
+            if (LineareAlgebra.euklDistance(kreis.getPosition(), bObj.getPosition()) < separationDist) {
+                help.setPosition((Vektor2D) LineareAlgebra.sub(kreis.getPosition(), bObj.getPosition()));
+                double length = help.length();
+                help.normalize();
+                help.div(length);
+                steeringForce.add(help);
             }
         }
         return steeringForce;
     }
+
 
     public Vektor2D alignment(Kreis kreis) throws VektorOverflowException {
         Vektor2D steeringForce = new Vektor2D(0, 0);
@@ -79,6 +68,7 @@ public class Steuerung {
         }
         if (count > 0) {
             steeringForce.div(count);
+
             steeringForce.sub(kreis.getVelocity());
         }
         return steeringForce;

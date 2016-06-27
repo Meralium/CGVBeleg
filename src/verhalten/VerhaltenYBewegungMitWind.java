@@ -22,10 +22,10 @@ public class VerhaltenYBewegungMitWind extends VerhaltenYBewegung implements Ver
         } catch (VektorOverflowException e) {
             e.printStackTrace();
         }
-        if (objekt.yPos >= 600 || objekt.yPos <= 0) {
+        if (objekt.getPosition().getY() >= 600 || objekt.getPosition().getY() <= 0) {
             yBewegung.setY(yBewegung.getY() * -1);
         }
-        if (objekt.xPos >= 800 || objekt.xPos <= 0) {
+        if (objekt.getPosition().getX() >= 800 || objekt.getPosition().getX() <= 0) {
             this.wind.setX(this.wind.getX() * -1);
         }
     }

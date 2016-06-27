@@ -1,28 +1,24 @@
 import aktoeren.Kreis;
-import frame.Szene;
+import frame.BasisFenster;
 import objektManager.KreiseManager;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import vektorPackage.Vektor2D;
-import verhalten.VerhaltenCursorFolgen;
 import verhalten.VerhaltenSchwarm;
-import verhalten.VerhaltenYBewegung;
-import verhalten.VerhaltenYBewegungMitWind;
-
 import java.util.concurrent.ThreadLocalRandom;
 
-public class WeltMehrererKreise extends Szene {
-    public Kreis kreis;
+public class WeltMehrererKreise extends BasisFenster {
+
+    public static final int ANZAHL_DER_KREISE = 100;
+    public static final int MAX_VELOCITY = 4;
     public KreiseManager kreiseManager;
     ThreadLocalRandom random = ThreadLocalRandom.current();
 
     public WeltMehrererKreise() {
         super();
         kreiseManager = KreiseManager.getExemplar();
-        generiereKreise(200);
+        generiereKreise(ANZAHL_DER_KREISE);
         initialisiereVerhaltenFuerAlle();
-        //this.kreis = new Kreis(0, 5, new Vektor2D(30, 40), new Vektor2D(0, 0));
-        //this.kreis.setVerhalten(new VerhaltenCursorFolgen(this.kreis));
     }
 
     private void initialisiereVerhaltenFuerAlle() {
@@ -33,9 +29,9 @@ public class WeltMehrererKreise extends Szene {
 
     private void generiereKreise(int anzahl) {
         for (int i = 0; i < anzahl; i++) {
-            this.kreiseManager.registriereKreis(new Kreis(i, (float) random.nextDouble(0.2, 10.0),
-                                                            new Vektor2D(random.nextDouble(0.0, 800.0), random.nextDouble(0.0, 600.0)),
-                                                            new Vektor2D(0,0)));
+            this.kreiseManager.registriereKreis(new Kreis(i, (float) random.nextDouble(1, 10.0),
+                    new Vektor2D(random.nextDouble(0.0, 800.0), random.nextDouble(0.0, 600.0)),
+                    new Vektor2D(0, 0), MAX_VELOCITY));
         }
     }
 
@@ -52,10 +48,7 @@ public class WeltMehrererKreise extends Szene {
                 Kreis aktKreis = kreiseManager.getKreis(i);
                 aktKreis.render();
                 aktKreis.update();
-                //GL11.glVertex2d(kreiseManager.getKreis(i).xPos, kreiseManager.getKreis(i).yPos);
             }
-            //this.kreis.render();
-            //this.kreis.update();
             Display.update();
         }
     }

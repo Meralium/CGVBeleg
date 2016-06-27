@@ -102,7 +102,7 @@ public abstract class Vektor {
     }
 
     public Vektor sub(Vektor subtrahend) throws VektorOverflowException {
-        return add(subtrahend.negiere());
+        return add(subtrahend.getClone().negiere());
     }
 
     public Vektor mult(double multiplikand) throws VektorOverflowException {
