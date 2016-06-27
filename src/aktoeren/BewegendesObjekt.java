@@ -1,9 +1,12 @@
+/*Erstellt von:
+* Anja Handrianz (s72812)
+* Artem Dyadichkin (s72788)*/
+
+
 package aktoeren;
 
-import vektorPackage.Vektor;
 import vektorPackage.Vektor2D;
 import verhalten.Verhalten;
-import verhalten.VerhaltenYBewegung;
 
 public abstract class BewegendesObjekt extends BasisObjekt {
 

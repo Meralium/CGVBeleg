@@ -1,3 +1,7 @@
+/*Erstellt von:
+* Anja Handrianz (s72812)
+* Artem Dyadichkin (s72788)*/
+
 import aktoeren.Kreis;
 import frame.BasisFenster;
 import objektManager.KreiseManager;
