@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class WeltMehrererKreise extends BasisFenster {
 
-    public static final int ANZAHL_DER_KREISE = 100;
+    public static final int ANZAHL_DER_KREISE = 300;
     public static final int MAX_VELOCITY = 4;
     public KreiseManager kreiseManager;
     ThreadLocalRandom random = ThreadLocalRandom.current();
@@ -41,7 +41,7 @@ public class WeltMehrererKreise extends BasisFenster {
 
     public void renderLoop() {
         while (!Display.isCloseRequested()) {
-            GL11.glClearColor(0.1F, 0.2F, 0.3F, 1.0F);
+            GL11.glClearColor(1.0F, 1.0F, 1.0F, 1.0F);
             GL11.glClear(16384);
             GL11.glMatrixMode(5889);
             GL11.glLoadIdentity();

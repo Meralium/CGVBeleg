@@ -14,7 +14,7 @@ public abstract class BasisFenster {
     private int width, height;
     private String title;
     public static String fragShaderSource = "varying vec4 color; uniform vec4 variable; void main() { gl_FragColor = color; }";
-    public static String vertexShaderSource = "varying vec4 color;float ambient = 0.85; void main() { gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex; color = vec4(gl_Position.xy*ambient,0.8,1);}";
+    public static String vertexShaderSource = "varying vec4 color;float ambient = 0.85; void main() { gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex; color = vec4(1,gl_Position.y*ambient,0,1);}";
 
     public BasisFenster() {
         this("BasisFenster", 800, 600);
